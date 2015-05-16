@@ -8,6 +8,7 @@ import (
 	"archive/tar"
 	"fmt"
 	"io/ioutil"
+	"net"
 	"os"
 	"path"
 	"path/filepath"
@@ -194,6 +195,10 @@ func (d *Driver) GetIP() (string, error) {
 	}
 	ip := strings.Trim(strings.Split(rawIP, "\n")[0], " ")
 	return ip, nil
+}
+
+func (d *Driver) GetIPv6CIDR() (*net.IPNet, error) {
+	return nil, fmt.Errorf("IPv6 not supported by %s", d.DriverName())
 }
 
 func (d *Driver) GetState() (state.State, error) {

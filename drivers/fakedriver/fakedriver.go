@@ -1,6 +1,9 @@
 package fakedriver
 
 import (
+	"fmt"
+	"net"
+
 	"github.com/docker/machine/drivers"
 	"github.com/docker/machine/state"
 )
@@ -28,6 +31,10 @@ func (d *FakeDriver) GetMachineName() string {
 
 func (d *FakeDriver) GetIP() (string, error) {
 	return "1.2.3.4", nil
+}
+
+func (d *FakeDriver) GetIPv6CIDR() (*net.IPNet, error) {
+	return nil, fmt.Errorf("IPv6 not supported by %s", d.DriverName())
 }
 
 func (d *FakeDriver) GetSSHHostname() (string, error) {

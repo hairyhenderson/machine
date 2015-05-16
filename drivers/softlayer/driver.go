@@ -3,6 +3,7 @@ package softlayer
 import (
 	"fmt"
 	"io/ioutil"
+	"net"
 	"os"
 	"regexp"
 	"time"
@@ -262,6 +263,10 @@ func (d *Driver) GetIP() (string, error) {
 	} else {
 		return d.getClient().VirtualGuest().GetPublicIp(d.Id)
 	}
+}
+
+func (d *Driver) GetIPv6CIDR() (*net.IPNet, error) {
+	return nil, fmt.Errorf("IPv6 not supported by %s", d.DriverName())
 }
 
 func (d *Driver) GetState() (state.State, error) {

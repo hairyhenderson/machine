@@ -3,6 +3,7 @@ package openstack
 import (
 	"fmt"
 	"io/ioutil"
+	"net"
 	"strings"
 	"time"
 
@@ -263,6 +264,10 @@ func (d *Driver) GetIP() (string, error) {
 		time.Sleep(2 * time.Second)
 	}
 	return "", fmt.Errorf("No IP found for the machine")
+}
+
+func (d *Driver) GetIPv6CIDR() (*net.IPNet, error) {
+	return nil, fmt.Errorf("IPv6 not supported by %s", d.DriverName())
 }
 
 func (d *Driver) GetState() (state.State, error) {

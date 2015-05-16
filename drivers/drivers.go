@@ -3,6 +3,7 @@ package drivers
 import (
 	"errors"
 	"fmt"
+	"net"
 	"sort"
 
 	"github.com/codegangsta/cli"
@@ -34,6 +35,10 @@ type Driver interface {
 	// GetIP returns an IP or hostname that this host is available at
 	// e.g. 1.2.3.4 or docker-host-d60b70a14d3a.cloudapp.net
 	GetIP() (string, error)
+
+	// GetIPv6CIDR returns the IPv6 CIDR block routed to the machine. This can be
+	// sent to Docker's `--fixed-v6-cidr` flag.
+	GetIPv6CIDR() (*net.IPNet, error)
 
 	// GetMachineName returns the name of the machine
 	GetMachineName() string

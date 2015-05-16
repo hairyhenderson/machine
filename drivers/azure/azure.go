@@ -3,6 +3,7 @@ package azure
 import (
 	"errors"
 	"fmt"
+	"net"
 	"os"
 	"os/exec"
 	"strings"
@@ -228,6 +229,10 @@ func (d *Driver) GetURL() (string, error) {
 
 func (d *Driver) GetIP() (string, error) {
 	return d.getHostname(), nil
+}
+
+func (d *Driver) GetIPv6CIDR() (*net.IPNet, error) {
+	return nil, fmt.Errorf("IPv6 not supported by %s", d.DriverName())
 }
 
 func (d *Driver) GetState() (state.State, error) {

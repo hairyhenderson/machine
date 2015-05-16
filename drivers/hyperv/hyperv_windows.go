@@ -3,6 +3,7 @@ package hyperv
 import (
 	"fmt"
 	"io/ioutil"
+	"net"
 	"time"
 
 	"github.com/codegangsta/cli"
@@ -384,6 +385,10 @@ func (d *Driver) GetIP() (string, error) {
 		return "", fmt.Errorf("IP not found")
 	}
 	return resp[0], nil
+}
+
+func (d *Driver) GetIPv6CIDR() (*net.IPNet, error) {
+	return nil, fmt.Errorf("IPv6 not supported by %s", d.DriverName())
 }
 
 func (d *Driver) publicSSHKeyPath() string {

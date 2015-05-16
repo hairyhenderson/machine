@@ -126,6 +126,10 @@ func (d *Driver) GetIP() (string, error) {
 	return d.IPAddress, nil
 }
 
+func (d *Driver) GetIPv6CIDR() (*net.IPNet, error) {
+	return nil, fmt.Errorf("IPv6 not supported by %s", d.DriverName())
+}
+
 func (d *Driver) GetState() (state.State, error) {
 	addr := fmt.Sprintf("%s:%d", d.IPAddress, d.SSHPort)
 	_, err := net.DialTimeout("tcp", addr, defaultTimeout)

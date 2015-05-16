@@ -3,6 +3,7 @@ package digitalocean
 import (
 	"fmt"
 	"io/ioutil"
+	"net"
 	"time"
 
 	"code.google.com/p/goauth2/oauth"
@@ -222,6 +223,10 @@ func (d *Driver) GetIP() (string, error) {
 		return "", fmt.Errorf("IP address is not set")
 	}
 	return d.IPAddress, nil
+}
+
+func (d *Driver) GetIPv6CIDR() (*net.IPNet, error) {
+	return nil, fmt.Errorf("IPv6 not supported by %s", d.DriverName())
 }
 
 func (d *Driver) GetState() (state.State, error) {

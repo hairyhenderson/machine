@@ -2,6 +2,7 @@ package google
 
 import (
 	"fmt"
+	"net"
 
 	"github.com/codegangsta/cli"
 	"github.com/docker/machine/drivers"
@@ -171,6 +172,10 @@ func (d *Driver) GetIP() (string, error) {
 		return "", err
 	}
 	return c.ip()
+}
+
+func (d *Driver) GetIPv6CIDR() (*net.IPNet, error) {
+	return nil, fmt.Errorf("IPv6 not supported by %s", d.DriverName())
 }
 
 // GetState returns a docker.hosts.state.State value representing the current state of the host.

@@ -2,6 +2,7 @@ package none
 
 import (
 	"fmt"
+	"net"
 	neturl "net/url"
 
 	"github.com/codegangsta/cli"
@@ -49,6 +50,10 @@ func (d *Driver) DriverName() string {
 
 func (d *Driver) GetIP() (string, error) {
 	return d.IPAddress, nil
+}
+
+func (d *Driver) GetIPv6CIDR() (*net.IPNet, error) {
+	return nil, fmt.Errorf("IPv6 not supported by %s", d.DriverName())
 }
 
 func (d *Driver) GetMachineName() string {
